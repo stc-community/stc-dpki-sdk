@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://user-images.githubusercontent.com/52234994/165200623-c60e956b-5805-4088-bf58-f97ebd8ae8b4.png" 
+<img src="https://user-images.githubusercontent.com/52234994/215312990-066258c1-1864-4d13-ae69-492f76e6e401.png" 
     width="40%" border="0" alt="ZACA">
 </p>
 
@@ -11,6 +11,6 @@
 $ go get github.com/stc-community/fvm-dpki-casdk
 ```
 
-DPKI SDK可以作为用户和验证者用来身份注册验证的工具包。
+The DPKI SDK can be used as a tool kit for users and authenticators to register and verify their identities.
 
 [Demo](https://github.com/stc-community/fvm-dpki-casdk/tree/main/examples)
