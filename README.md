@@ -8,10 +8,10 @@
 ### SDK Installation
 
 ```
-$ go get github.com/flowshield/casdk
+$ go get github.com/stc-community/fvm-dpki-casdk
 ```
 
-The classic usage of the ZACA SDK is that the client and the server use the certificate issued by the CA center for encrypted communication. The following is the usage of the sdk between the client and the server.
+DPKI SDK可以作为用户和验证者用来身份注册验证的工具包。
 
 See：[Demo](https://github.com/flowshield/casdk/tree/master/examples)
 
