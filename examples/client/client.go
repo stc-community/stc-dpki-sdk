@@ -24,7 +24,7 @@ import (
 var (
 	caAddr       = flag.String("ca", "https://127.0.0.1:8081", "CA Server")
 	contractAddr = flag.String("contract", "0x7396fbfa3192325162ca39da7ab7b43bd587750a", "contract address")
-	rpcAddr      = flag.String("rpc", "https://goerli.infura.io/v3/81fec17192394537a0408c47ef5ec0b8", "rpc address")
+	rpcAddr      = flag.String("rpc", "https://wallaby.node.glif.io/rpc/v0", "rpc address")
 	authKey      = flag.String("auth-key", "0739a645a7d6601d9d45f6b237c4edeadad904f2fce53625dfdd541ec4fc8134", "Auth Key")
 )
 
