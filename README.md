@@ -13,5 +13,4 @@ $ go get github.com/stc-community/fvm-dpki-casdk
 
 DPKI SDK可以作为用户和验证者用来身份注册验证的工具包。
 
-See：[Demo](https://github.com/flowshield/casdk/tree/master/examples)
-
+[Demo](https://github.com/stc-community/fvm-dpki-casdk/tree/main/examples)
