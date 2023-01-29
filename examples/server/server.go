@@ -11,17 +11,17 @@ import (
 	"flag"
 	"fmt"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
-	"github.com/flowshield/casdk/caclient"
-	"github.com/flowshield/casdk/contract"
 	"github.com/flowshield/cfssl/hook"
+	"github.com/stc-community/stc-dpki-casdk/caclient"
+	"github.com/stc-community/stc-dpki-casdk/contract"
 	"log"
 	"net"
 	"os"
 	"strings"
 
-	"github.com/flowshield/casdk/keygen"
-	"github.com/flowshield/casdk/pkg/logger"
-	"github.com/flowshield/casdk/pkg/spiffe"
+	"github.com/stc-community/stc-dpki-casdk/keygen"
+	"github.com/stc-community/stc-dpki-casdk/pkg/logger"
+	"github.com/stc-community/stc-dpki-casdk/pkg/spiffe"
 	"go.uber.org/zap/zapcore"
 )
 

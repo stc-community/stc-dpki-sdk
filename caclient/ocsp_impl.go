@@ -12,8 +12,8 @@ import (
 	"golang.org/x/crypto/ocsp"
 	"golang.org/x/sync/singleflight"
 
-	"github.com/flowshield/casdk/pkg/logger"
 	"github.com/pkg/errors"
+	"github.com/stc-community/stc-dpki-casdk/pkg/logger"
 )
 
 var ocspBlockSign int64 = 0

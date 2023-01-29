@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/flowshield/casdk/pkg/attrmgr"
-	"github.com/flowshield/casdk/pkg/spiffe"
+	"github.com/stc-community/stc-dpki-casdk/pkg/attrmgr"
+	"github.com/stc-community/stc-dpki-casdk/pkg/spiffe"
 )
 
 var (

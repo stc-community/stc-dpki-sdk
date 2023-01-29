@@ -2,8 +2,8 @@ package keyprovider
 
 import (
 	"fmt"
-	"github.com/flowshield/casdk/keygen"
-	"github.com/flowshield/casdk/pkg/spiffe"
+	"github.com/stc-community/stc-dpki-casdk/keygen"
+	"github.com/stc-community/stc-dpki-casdk/pkg/spiffe"
 	"testing"
 )
 

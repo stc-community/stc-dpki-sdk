@@ -10,7 +10,7 @@ import (
 	"github.com/pkg/errors"
 
 	jsoniter "encoding/json"
-	"github.com/flowshield/casdk/signature"
+	"github.com/stc-community/stc-dpki-casdk/signature"
 )
 
 var revokePath = "/api/v1/cfssl/revoke"

@@ -1,10 +1,10 @@
 package caclient
 
 import (
-	"github.com/flowshield/casdk/keygen"
-	"github.com/flowshield/casdk/pkg/logger"
 	"github.com/flowshield/cfssl/csr"
 	"github.com/flowshield/cfssl/transport/core"
+	"github.com/stc-community/stc-dpki-casdk/keygen"
+	"github.com/stc-community/stc-dpki-casdk/pkg/logger"
 	"go.uber.org/zap"
 )
 

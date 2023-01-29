@@ -10,7 +10,7 @@ import (
 	"github.com/pkg/errors"
 	"golang.org/x/crypto/ocsp"
 
-	"github.com/flowshield/casdk/pkg/memorycacher"
+	"github.com/stc-community/stc-dpki-casdk/pkg/memorycacher"
 	"go.uber.org/zap"
 )
 

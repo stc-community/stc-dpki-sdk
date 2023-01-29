@@ -12,13 +12,13 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/flowshield/casdk/pkg/logger"
 	"github.com/flowshield/cfssl/csr"
 	"github.com/flowshield/cfssl/helpers"
 	"github.com/pkg/errors"
+	"github.com/stc-community/stc-dpki-casdk/pkg/logger"
 
-	"github.com/flowshield/casdk/keygen"
-	"github.com/flowshield/casdk/pkg/spiffe"
+	"github.com/stc-community/stc-dpki-casdk/keygen"
+	"github.com/stc-community/stc-dpki-casdk/pkg/spiffe"
 )
 
 const (

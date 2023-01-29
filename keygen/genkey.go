@@ -9,7 +9,7 @@ import (
 	"crypto/x509/pkix"
 	"encoding/pem"
 	"errors"
-	"github.com/flowshield/casdk/pkg/attrmgr"
+	"github.com/stc-community/stc-dpki-casdk/pkg/attrmgr"
 	"os"
 	"strings"
 	"time"
@@ -17,9 +17,9 @@ import (
 	cf_csr "github.com/flowshield/cfssl/csr"
 	"github.com/flowshield/cfssl/helpers"
 
-	"github.com/flowshield/casdk/pkg/pkiutil"
-	"github.com/flowshield/casdk/pkg/spiffe"
-	"github.com/flowshield/casdk/pkg/util"
+	"github.com/stc-community/stc-dpki-casdk/pkg/pkiutil"
+	"github.com/stc-community/stc-dpki-casdk/pkg/spiffe"
+	"github.com/stc-community/stc-dpki-casdk/pkg/util"
 )
 
 type SupportedSignatureAlgorithms string

@@ -3,7 +3,7 @@ package signature
 import (
 	"crypto/ecdsa"
 	"fmt"
-	"github.com/flowshield/casdk/keygen"
+	"github.com/stc-community/stc-dpki-casdk/keygen"
 	"testing"
 )
 
