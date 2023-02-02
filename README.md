@@ -13,4 +13,4 @@ $ go get github.com/stc-community/fvm-dpki-casdk
 
 The DPKI SDK can be used as a tool kit for users and authenticators to register and verify their identities.
 
-[Demo](https://github.com/stc-community/fvm-dpki-casdk/tree/main/examples)
+[Demo](https://github.com/stc-community/fvm-dpki-casdk/tree/main/test)

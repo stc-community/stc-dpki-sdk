@@ -20,12 +20,11 @@ import (
 
 // CertManager Certificate manager
 type CertManager struct {
-	logger      *zap.SugaredLogger
-	apiClient   *client.AuthRemote
-	profile     string
-	caAddr      string
-	authKey     string
-	ocspFetcher OcspClient
+	logger    *zap.SugaredLogger
+	apiClient *client.AuthRemote
+	profile   string
+	caAddr    string
+	authKey   string
 	// TODO Certificate storage
 	caCertTmp *x509.Certificate
 }
@@ -37,7 +36,6 @@ func (cai *CAInstance) NewCertManager() (*CertManager, error) {
 		return nil, errors.Wrap(err, "Auth key Configuration error")
 	}
 	caAddr := cai.CaAddr
-	ocspAddr := cai.OcspAddr
 	apiClient := client.NewAuthServer(caAddr, &tls.Config{
 		InsecureSkipVerify: true, //nolint:gosec
 	}, ap)
@@ -45,17 +43,12 @@ func (cai *CAInstance) NewCertManager() (*CertManager, error) {
 	if profile == "" {
 		return nil, errors.New("profile could not be empty")
 	}
-	ocspFetcher, err := NewOcspMemCache(cai.Logger.Sugar().Named("ocsp"), ocspAddr)
-	if err != nil {
-		return nil, err
-	}
 	cm := &CertManager{
-		logger:      cai.Logger.Sugar().Named("cert-manager"),
-		apiClient:   apiClient,
-		profile:     profile,
-		caAddr:      caAddr,
-		ocspFetcher: ocspFetcher,
-		authKey:     cai.Conf.CFIdentity.Profiles["cfssl"]["auth-key"],
+		logger:    cai.Logger.Sugar().Named("cert-manager"),
+		apiClient: apiClient,
+		profile:   profile,
+		caAddr:    caAddr,
+		authKey:   cai.Conf.CFIdentity.Profiles["cfssl"]["auth-key"],
 	}
 
 	cm.caCertTmp, err = cm.CACert()
@@ -149,22 +142,6 @@ func (cm *CertManager) RevokeByKeyPEM(keyPEM, certPEM []byte) error {
 		return err
 	}
 	return revokeCert(cm.caAddr, priv, cert)
-}
-
-// VerifyCertDefaultIssuer ...
-func (cm *CertManager) VerifyCertDefaultIssuer(leafPEM []byte) error {
-	leaf, err := helpers.ParseCertificatePEM(leafPEM)
-	if err != nil {
-		return err
-	}
-	ok, err := cm.ocspFetcher.Validate(leaf, cm.caCertTmp)
-	if err != nil {
-		return err
-	}
-	if !ok {
-		return errors.New("Certificate revoked")
-	}
-	return nil
 }
 
 // CACert ...

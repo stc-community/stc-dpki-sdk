@@ -22,7 +22,6 @@ const (
 type Exchanger struct {
 	Transport   *Transport
 	IDGIdentity *spiffe.IDGIdentity
-	OcspFetcher OcspClient
 
 	caAddr string
 	logger *zap.SugaredLogger
@@ -35,27 +34,6 @@ func init() {
 	hook.ClientInsecureSkipVerify = true
 }
 
-// NewExchangerWithKeypair ...
-func (cai *CAInstance) NewExchangerWithKeypair(id *spiffe.IDGIdentity, keyPEM []byte, certPEM []byte) (*Exchanger, error) {
-	tr, err := cai.NewTransport(id, keyPEM, certPEM)
-	if err != nil {
-		return nil, err
-	}
-	of, err := NewOcspMemCache(cai.Logger.Sugar().Named("ocsp"), cai.Conf.OcspAddr)
-	if err != nil {
-		return nil, err
-	}
-	return &Exchanger{
-		Transport:   tr,
-		IDGIdentity: id,
-		OcspFetcher: of,
-		logger:      cai.Logger.Sugar().Named("ca"),
-		caAddr:      cai.CaAddr,
-
-		caiConf: &cai.Conf,
-	}, nil
-}
-
 // NewExchanger ...
 func (cai *CAInstance) NewExchanger(id *spiffe.IDGIdentity, metaData ...map[string]interface{}) (*Exchanger, error) {
 	tr, err := cai.NewTransport(id, nil, nil)
@@ -66,14 +44,9 @@ func (cai *CAInstance) NewExchanger(id *spiffe.IDGIdentity, metaData ...map[stri
 		// 元数据
 		tr.MetaData = metaData[0]
 	}
-	of, err := NewOcspMemCache(cai.Logger.Sugar().Named("ocsp"), cai.Conf.OcspAddr)
-	if err != nil {
-		return nil, err
-	}
 	return &Exchanger{
 		Transport:   tr,
 		IDGIdentity: id,
-		OcspFetcher: of,
 		logger:      cai.Logger.Sugar().Named("ca"),
 		caAddr:      cai.CaAddr,
 

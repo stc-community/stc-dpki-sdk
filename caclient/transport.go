@@ -56,46 +56,19 @@ type Transport struct {
 	MetaData map[string]interface{}
 }
 
-// TLSClientAuthClientConfig Client TLS configuration, changing certificate dynamically
-func (tr *Transport) TLSClientAuthClientConfig(host string) (*tls.Config, error) {
+// TLSClientConfig Client TLS configuration, changing certificate dynamically
+func (tr *Transport) TLSClientConfig() (*tls.Config, error) {
 	return &tls.Config{
-		GetClientCertificate: func(info *tls.CertificateRequestInfo) (*tls.Certificate, error) {
+		InsecureSkipVerify: true,
+		MinVersion:         tls.VersionTLS12,
+		GetCertificate: func(info *tls.ClientHelloInfo) (*tls.Certificate, error) {
 			cert, err := tr.GetCertificate()
 			if err != nil {
-				tr.logger.Errorf("Client certificate acquisition error: %v", err)
+				tr.logger.Errorf("client certificate acquisition error: %v", err)
 				return nil, err
 			}
 			return cert, nil
 		},
-		RootCAs:      tr.TrustStore.Pool(),
-		ServerName:   host,
-		CipherSuites: core.CipherSuites,
-		MinVersion:   tls.VersionTLS12,
-	}, nil
-}
-
-// TLSClientAuthServerConfig The server TLS configuration needs to be changed dynamically
-func (tr *Transport) TLSClientAuthServerConfig() (*tls.Config, error) {
-	return &tls.Config{
-		// Get configuration dynamically
-		GetConfigForClient: func(info *tls.ClientHelloInfo) (*tls.Config, error) {
-			tlsConfig := &tls.Config{
-				GetCertificate: func(info *tls.ClientHelloInfo) (*tls.Certificate, error) {
-					cert, err := tr.GetCertificate()
-					if err != nil {
-						tr.logger.Errorf("Server certificate acquisition error: %v", err)
-						return nil, err
-					}
-					return cert, nil
-				},
-				RootCAs:   tr.TrustStore.Pool(),
-				ClientCAs: tr.ClientTrustStore.Pool(),
-			}
-			return tlsConfig, nil
-		},
-		ClientAuth:   tls.RequireAndVerifyClientCert,
-		CipherSuites: core.CipherSuites,
-		MinVersion:   tls.VersionTLS12,
 	}, nil
 }
 
@@ -111,11 +84,8 @@ func (tr *Transport) TLSServerConfig() (*tls.Config, error) {
 			}
 			return cert, nil
 		},
-		RootCAs:      tr.TrustStore.Pool(),
-		ClientCAs:    tr.ClientTrustStore.Pool(),
-		CipherSuites: core.CipherSuites,
-		MinVersion:   tls.VersionTLS12,
-		ClientAuth:   tls.VerifyClientCertIfGiven,
+		MinVersion: tls.VersionTLS12,
+		ClientAuth: tls.RequireAnyClientCert, // 要求客户端证书, 但不要求有效
 	}, nil
 }
 

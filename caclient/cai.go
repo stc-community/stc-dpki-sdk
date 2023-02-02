@@ -23,7 +23,6 @@ type Conf struct {
 	CFIdentity *core.Identity
 	DiskStore  bool
 	CaAddr     string
-	OcspAddr   string
 	Logger     *zap.Logger
 	CSRConf    keygen.CSRConf
 }
@@ -69,12 +68,6 @@ func WithCAServer(role Role, addr string) OptionFunc {
 		})
 		c.CFIdentity.Profiles["cfssl"]["remote"] = addr
 		c.CFIdentity.Profiles["cfssl"]["profile"] = string(role)
-	}
-}
-
-func WithOcspAddr(ocspAttr string) OptionFunc {
-	return func(c *Conf) {
-		c.OcspAddr = ocspAttr
 	}
 }
 
