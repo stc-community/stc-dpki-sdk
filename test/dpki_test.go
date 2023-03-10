@@ -225,12 +225,12 @@ retry:
 			log.Println("Failed to accept connection: ", err.Error())
 			continue
 		}
-		//开辟独立协程与该客聊天
+		//Open an independent route to chat with the customer
 		go ChatWith(conn)
 	}
 }
 
-// ChatWith 在conn网络专线中与客户端对话
+// ChatWith Talk to clients in the conn network leased line
 func ChatWith(conn net.Conn) {
 	var packet = make([]byte, 1420)
 	for {
@@ -241,17 +241,17 @@ func ChatWith(conn net.Conn) {
 			return
 		}
 		clientMsg := string(packet[:n])
-		fmt.Println("接收", clientMsg)
+		fmt.Println("receive:", clientMsg)
 
 		///---一个完整的消息回合
 		msg := strings.Trim(clientMsg, "\r\n")
 		if msg != "exit" {
-			conn.Write([]byte("已读:" + clientMsg))
+			conn.Write([]byte("Read:" + clientMsg))
 		} else {
 			conn.Write([]byte("bye"))
 			break
 		}
 	}
 	conn.Close()
-	fmt.Println("客户端断开连接", conn.RemoteAddr())
+	fmt.Println("Client disconnected", conn.RemoteAddr())
 }
